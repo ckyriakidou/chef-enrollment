@@ -1,0 +1,4 @@
+---
+- include: install_{{ ansible_os_family }}.yml
+
+- include: bootstrap_{{ ansible_os_family }}.yml

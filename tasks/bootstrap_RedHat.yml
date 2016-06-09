@@ -1,0 +1,21 @@
+---
+- name: creating chef config dir
+  file: path={{ chef_config_dir }} state=directory mode=0755
+
+- name: copy validation.pem to right place
+  copy: src={{chef_config_dir}}/validator.pem dest={{ chef_config_dir }}validator.pem owner=root
+
+- name: creating trust certs dir
+  file: path="{{chef_config_dir}}/trusted_certs/" state=directory mode=0755
+
+- name: populate above dir
+  shell:  openssl s_client -connect {{ chef_server_hostname }}:{{ chef_server_ssl_port }} </dev/null 2>/dev/null | openssl x509 -outform PEM > "{{ chef_config_dir }}/trusted_certs/{{ chef_server_hostname }}.pem"
+  args:
+     creates: "{{ chef_config_dir }}/trusted_certs/{{ chef_server_hostname }}.pem"
+     executable: /bin/bash
+
+- name: create client.rb
+  template: src=client.j2 dest={{ chef_config_dir }}client.rb
+
+- name: run chef-client on box
+  command: chef-client -n "{{ chef_roles }}" -E {{ chef_environment }}

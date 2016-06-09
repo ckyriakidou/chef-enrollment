@@ -1,0 +1,4 @@
+---
+- include_vars: "{{ ansible_distribution }}.yml"
+- name: install the chef-client rpm from a remote repo
+  yum: name={{ chef_url_package }} 

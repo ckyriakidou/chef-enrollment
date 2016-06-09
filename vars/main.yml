@@ -1,0 +1,9 @@
+---
+chef_server_hostname: chef-server.example.com
+chef_server_ssl_port: 443
+chef_server_url: "https://{{ chef_server_hostname }}/organizations/"
+chef_organization: poc
+chef_environment: test
+chef_config_dir: '/etc/chef/'
+chef_roles: base
+
