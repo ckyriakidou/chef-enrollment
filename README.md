@@ -14,6 +14,14 @@ Role Variables
 
 A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
 
+* chef_url_package: https://packages.chef.io/stable/el/7/chef-12.10.24-1.el7.x86_64.rpm  This variable is the chef package variable, it is responsible for the installation of the right package on your system. I would normally expect organization repositories to be managed and only the name of the package to be mentioned here
+* chef_server_hostname: chef-server.example.com the chef server
+* chef_server_ssl_port: 443 the expected communication port
+* chef_server_url: "https://{{ chef_server_hostname }}/organizations/" what the default URL should look like
+* chef_organization: poc - the name of the organization
+* chef_environment: test - the name of the environment you want he client to be part of 
+* chef_config_dir: '/etc/chef/' - the default configuration repository
+* chef_roles: base - the default named policy role (chef-client -n <name>)
 
 
 Dependencies
@@ -25,10 +33,11 @@ Example Playbook
 ----------------
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
+    - hosts: all
+      become: yes
+      become_method: sudo
       roles:
-         - { role: username.rolename, x: 42 }
+        - chef-enrollment      
 
 License
 -------
