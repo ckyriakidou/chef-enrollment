@@ -1,6 +1,6 @@
 galaxy_info:
-  author: your name
-  description: 
+  author: Christina Kyriakidou
+  description: This module enrolls RHEL 7 machines to chef servers on the client side
   company: your company (optional)
   
   # If the issue tracker for your role is not on github, uncomment the
@@ -31,13 +31,13 @@ galaxy_info:
   # the ones that apply to your role. If you don't see your
   # platform on this list, let us know and we'll get it added!
   #
-  #platforms:
-  #- name: EL
-  #  versions:
+  platforms:
+  - name: EL
+    versions:
   #  - all
   #  - 5
   #  - 6
-  #  - 7
+    - 7
   #- name: GenericUNIX
   #  versions:
   #  - all
@@ -158,7 +158,7 @@ galaxy_info:
   #  - stretch
   #  - wheezy
   
-  galaxy_tags: []
+  galaxy_tags: [chef, chef-client, enrollment]
     # List tags for your role here, one per line. A tag is
     # a keyword that describes and categorizes the role.
     # Users find roles by searching for tags. Be sure to
